@@ -1,0 +1,7 @@
+{
+  "GET /": {
+    "description": "Opens a json showing all available endpoints.",
+    "example": "n/a",
+    "queries": "n/a"
+  }
+}

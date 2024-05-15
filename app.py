@@ -1,12 +1,15 @@
 from flask import Flask
+from flask_cors import CORS, cross_origin
+import json
 
 app = Flask(__name__)
+CORS(app)
 
+@app.route('/', methods=['GET'])
+def get_endpoints():
+    file = open('./endpoints.json')
+    data = json.load(file)
+    return data
 
-@app.route('/')
-def hello():
-    return '<h1>Hello, World!</h1>'
-
-@app.route('/about')
-def about():
-    return '<h3>This is a Flask web application.</h3>'
+if __name__ == "__main__":
+    app.run()
