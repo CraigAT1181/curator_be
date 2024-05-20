@@ -13,8 +13,8 @@ Thanks for your interest in Curator. Below is a list of instructions that will a
 
 # Create a virtual environment
 
-3. In the terminal, type the command `python3 -m venv .venv` to create a virtual environment called .venv, then
-4. Activate the virtual environment with the command `source .venv/bin/activate`.
+3. In the terminal, type the command `python3 -m venv curator_venv` to create a virtual environment, then
+4. Activate the virtual environment with the command `source curator_venv/bin/activate`.
 
 # Install pre-requisite packages
 
