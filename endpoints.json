@@ -3,5 +3,35 @@
     "description": "Opens a json showing all available endpoints.",
     "example": "n/a",
     "queries": "n/a"
+  },
+  "GET /met_exhibits": {
+    "description": "Obtains all met museum exhibits, paginated into blocks of 10, along with the number of pages.",
+    "example": [
+      {
+        "artist": "James Barton Longacre",
+        "artistWiki": "https://www.wikidata.org/wiki/Q3806459",
+        "date": "1853",
+        "image": "",
+        "machineBeginDate": 1853,
+        "machineEndDate": 1853,
+        "objectID": 1,
+        "objectType": "Coin",
+        "objectWiki": "",
+        "title": "One-dollar Liberty Head Coin"
+      },
+      {
+        "artist": "Christian Gobrecht",
+        "artistWiki": "https://www.wikidata.org/wiki/Q5109648",
+        "date": "1901",
+        "image": "",
+        "machineBeginDate": 1901,
+        "machineEndDate": 1901,
+        "objectID": 2,
+        "objectType": "Coin",
+        "objectWiki": "",
+        "title": "Ten-dollar Liberty Head Coin"
+      }
+    ],
+    "queries": "page=1&objects_per_page=10"
   }
 }

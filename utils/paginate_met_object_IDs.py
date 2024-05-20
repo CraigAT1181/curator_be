@@ -15,12 +15,12 @@ def paginate_met_object_IDs():
         start_index = (page - 1) * objects_per_page
         end_index = min(start_index + objects_per_page, len(object_ID_array))
 
-        object_ids_chunk = object_ID_array[start_index:end_index]
+        object_ids_block = object_ID_array[start_index:end_index]
 
         total_pages = met_response_object.get("total", 0) // objects_per_page + (1 if met_response_object.get("total", 0) % objects_per_page > 0 else 0)
 
         paginated_object = {
-            'object_ids': object_ids_chunk,
+            'object_ids': object_ids_block,
             'total_pages': total_pages
         }
         
