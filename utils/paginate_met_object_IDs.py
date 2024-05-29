@@ -10,7 +10,7 @@ def paginate_met_object_IDs():
         
         page = int(request.args.get('page', 1))
 
-        objects_per_page = int(request.args.get('objects_per_page', 10))
+        objects_per_page = int(request.args.get('objects_per_page', 8))
 
         start_index = (page - 1) * objects_per_page
         end_index = min(start_index + objects_per_page, len(object_ID_array))
