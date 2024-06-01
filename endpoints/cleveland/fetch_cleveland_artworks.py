@@ -1,8 +1,7 @@
-from flask import jsonify
 import requests
 import logging
 
-def fetch_cleveland_exhibits():
+def fetch_cleveland_artworks():
     try:
         base_url = "https://openaccess-api.clevelandart.org/api/artworks/?fields=id,title,creation_date,creators,images"
         response = requests.get(base_url)
@@ -15,7 +14,8 @@ def fetch_cleveland_exhibits():
             if info:
                 total = info.get("total")
             else:
-                return jsonify({"error": "No info key found."}), 500
+                logging.error("No info key found.")
+                return None, "No info key found."
 
             data = json_response.get("data")
 
@@ -43,17 +43,18 @@ def fetch_cleveland_exhibits():
 
                     artworks.append(artwork_info)
                 
-                return jsonify({
+                return {
                     "artworks": artworks,
                     "total": total
-                })
+                }, None
             else:
-                return jsonify({"error": "No data key found."}), 500
+                logging.error("No data key found.")
+                return None, "No data key found."
     
         else:
             logging.error(f"Error: {response.status_code} - {response.text}")
-            return jsonify({'error': 'Failed to fetch artworks.'}), response.status_code
+            return None, 'Failed to fetch artworks.'
 
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
-        return jsonify({"message": "An unexpected error occurred."}), 500
+        return None, "An unexpected error occurred."

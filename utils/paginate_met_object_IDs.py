@@ -1,4 +1,4 @@
-from flask import jsonify, request
+from flask import request
 from utils.fetch_all_met_object_IDs import fetch_all_met_object_IDs
 import logging
 
@@ -28,4 +28,5 @@ def paginate_met_object_IDs():
     
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
-        return jsonify({"message": "An unexpected error occurred."}), 500
+        return None, "An unexpected error occurred."
+

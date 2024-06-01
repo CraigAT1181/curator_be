@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from endpoints.metmuseum.fetch_met_exhibits import fetch_met_exhibits
 from endpoints.metmuseum.fetch_met_exhibit import fetch_met_exhibit
 
-from endpoints.cleveland.fetch_cleveland_exhibits import fetch_cleveland_exhibits
+from utils.paginate_cleveland_artworks import paginate_cleveland_artworks
 
 load_dotenv()
 
@@ -43,12 +43,12 @@ def create_app(config_name='default'):
     
     # CLEVELAND MUSEUM ENDPOINTS
 
-    @app.route('/cleveland_exhibits', methods=['GET'])
+    @app.route('/cleveland_artworks', methods=['GET'])
     @cross_origin()
-    def get_cleveland_exhibits():
-        exhibits = fetch_cleveland_exhibits()
+    def get_cleveland_artworks():
+        artworks = paginate_cleveland_artworks()
         
-        return exhibits
+        return artworks
     
     return app
 

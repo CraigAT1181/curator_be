@@ -86,8 +86,8 @@ def test_get_met_exhibit(client, mocker):
 
 # ---- CLEVELAND ENDPOINTS ---- #
 
-def test_cleveland_exhibits(client, mocker):
-    mock_fetch_cleveland_exhibits = mocker.patch('app.fetch_cleveland_exhibits')
+def test_paginate_cleveland_artworks(client, mocker):
+    mock_paginate_cleveland_artworks = mocker.patch('app.paginate_cleveland_artworks')
     
     mock_response = Flask.response_class(
         response=json.dumps({
@@ -123,15 +123,15 @@ def test_cleveland_exhibits(client, mocker):
                     }
                 }
             ],
-            "total": 2
+            "total_pages": 1
         }),
         status=200,
         mimetype='application/json'
     )
     
-    mock_fetch_cleveland_exhibits.return_value = mock_response
+    mock_paginate_cleveland_artworks.return_value = mock_response
 
-    response = client.get('/cleveland_exhibits')
+    response = client.get('/cleveland_artworks')
 
     assert response.status_code == 200
     data = response.get_json()
