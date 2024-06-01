@@ -19,8 +19,8 @@ def fetch_all_met_object_IDs():
 
             return result
         else:
-            print(f"Error: {response.status_code} - {response.text}")
-            return jsonify({'error': response.status_code, 'msg': response.text})
+            logging.error(f"Error: {response.status_code} - {response.text}")
+            return jsonify({"error": "Failed to fetch object IDs", "status_code": response.status_code}), response.status_code
         
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")

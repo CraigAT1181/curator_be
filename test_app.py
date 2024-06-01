@@ -83,3 +83,58 @@ def test_get_met_exhibit(client, mocker):
     assert data['artistWikidata_URL'] == "Artist Wiki URL 1"
     assert data['objectWikidata_URL'] == "Object Wiki URL 1"
     assert data['GalleryNumber'] == "Gallery 1"
+
+# ---- CLEVELAND ENDPOINTS ---- #
+
+def test_cleveland_exhibits(client, mocker):
+    mock_fetch_cleveland_exhibits = mocker.patch('app.fetch_cleveland_exhibits')
+    
+    mock_response = Flask.response_class(
+        response=json.dumps({
+            "artworks": [
+                {
+                    "id": 1,
+                    "title": "Artwork 1",
+                    "date": "date 1",
+                    "creators": [
+                        "Creator 1"
+                    ],
+                    "image": {
+                        "filename": "filename 1",
+                        "filesize": "filesize 1",
+                        "height": "height 1",
+                        "url": "url 1",
+                        "width": "width 1"
+                    }
+                },
+                {
+                    "id": 2,
+                    "title": "Artwork 2",
+                    "date": "date 2",
+                    "creators": [
+                        "Creator 2"
+                    ],
+                    "image": {
+                        "filename": "filename 2",
+                        "filesize": "filesize 2",
+                        "height": "height 2",
+                        "url": "url 2",
+                        "width": "width 2"
+                    }
+                }
+            ],
+            "total": 2
+        }),
+        status=200,
+        mimetype='application/json'
+    )
+    
+    mock_fetch_cleveland_exhibits.return_value = mock_response
+
+    response = client.get('/cleveland_exhibits')
+
+    assert response.status_code == 200
+    data = response.get_json()
+    assert len(data['artworks']) == 2
+    assert data['artworks'][0]['title'] == "Artwork 1"
+    assert data['artworks'][1]['title'] == "Artwork 2"
