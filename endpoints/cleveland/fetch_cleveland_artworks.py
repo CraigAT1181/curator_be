@@ -34,7 +34,7 @@ def fetch_cleveland_artworks():
                         creators.append(creator)
                 
                     artwork_info = {
-                        "id": id,
+                        "objectID": id,
                         "title": title,
                         "date": creation_date,
                         "image": image,
