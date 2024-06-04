@@ -4,11 +4,14 @@ from cache import cache
 import json
 from dotenv import load_dotenv
 
+# MET IMPORTS
 from endpoints.metmuseum.fetch_met_exhibits import fetch_met_exhibits
 from endpoints.metmuseum.fetch_met_exhibit import fetch_met_exhibit
 
-from utils.paginate_cleveland_artworks import paginate_cleveland_artworks
+# CLEVELAND IMPORTS
+from endpoints.cleveland.fetch_cleveland_artworks import fetch_cleveland_artworks
 from endpoints.cleveland.fetch_single_artwork import fetch_single_artwork
+from endpoints.cleveland.search_cleveland_artworks import search_cleveland_artworks
 
 load_dotenv()
 
@@ -26,8 +29,7 @@ def create_app(config_name='default'):
         data = json.load(file)
         return data
 
-    # MET MUSEUM ENDPOINTS
-     
+    # ---------------- MET MUSEUM ENDPOINTS -----------------
     @app.route('/met_exhibits', methods=['GET'])
     @cross_origin()
     def get_met_exhibits():
@@ -42,12 +44,11 @@ def create_app(config_name='default'):
         
         return exhibit
     
-    # CLEVELAND MUSEUM ENDPOINTS
-
+    # --------------- CLEVELAND MUSEUM ENDPOINTS -------------
     @app.route('/cleveland_artworks', methods=['GET'])
     @cross_origin()
     def get_cleveland_artworks():
-        artworks = paginate_cleveland_artworks()
+        artworks = fetch_cleveland_artworks()
         
         return artworks
     
@@ -57,6 +58,14 @@ def create_app(config_name='default'):
         artwork = fetch_single_artwork(object_ID)
 
         return artwork
+    
+    @app.route('/cleveland_artworks/search', methods=['GET'])
+    @cross_origin()
+    def get_searched_cleveland_artworks():
+        keywords = "chinese song"
+        artworks = search_cleveland_artworks(keywords)
+        
+        return artworks
 
     return app
 

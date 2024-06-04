@@ -1,20 +1,26 @@
 from flask import jsonify
-from utils.paginate_met_object_IDs import paginate_met_object_IDs
+from utils.fetch_met_ids import fetch_met_ids
+from utils.paginate_array import paginate_array
 import requests
 import logging
 
 def fetch_met_exhibits():
     try:
-        paginated_met_response = paginate_met_object_IDs()
+        met_request = fetch_met_ids()
 
-        object_IDs = paginated_met_response.get("object_ids")
-        total_pages = paginated_met_response.get("total_pages")
+        objectID_array = met_request.get("objectIDs")
+        total = met_request.get("total")
+
+        paginated_met_request = paginate_array(objectID_array, total)
+
+        object_ids = paginated_met_request.get("block")
+        total_pages = paginated_met_request.get("total_pages")
 
         base_url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/"
 
         exhibits = []
-        for object_ID in object_IDs:
-            exhibit_response = requests.get(base_url + str(object_ID))
+        for object_id in object_ids:
+            exhibit_response = requests.get(f"{base_url}{object_id}")
             if exhibit_response.status_code == 200:
                 exhibit_data = exhibit_response.json()
                 exhibit = {

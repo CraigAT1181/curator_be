@@ -86,8 +86,8 @@ def test_get_met_exhibit(client, mocker):
 
 # ---- CLEVELAND ENDPOINTS ---- #
 
-def test_paginate_cleveland_artworks(client, mocker):
-    mock_paginate_cleveland_artworks = mocker.patch('app.paginate_cleveland_artworks')
+def test_fetch_cleveland_artworks(client, mocker):
+    mock_fetch_cleveland_artworks = mocker.patch('app.fetch_cleveland_artworks')
     
     mock_response = Flask.response_class(
         response=json.dumps({
@@ -129,7 +129,7 @@ def test_paginate_cleveland_artworks(client, mocker):
         mimetype='application/json'
     )
     
-    mock_paginate_cleveland_artworks.return_value = mock_response
+    mock_fetch_cleveland_artworks.return_value = mock_response
 
     response = client.get('/cleveland_artworks')
 
