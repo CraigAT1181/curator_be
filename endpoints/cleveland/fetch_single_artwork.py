@@ -39,7 +39,8 @@ def fetch_single_artwork(object_ID):
                     "department": department,
                     "description": description,
                     "did_you_know": did_you_know,
-                    "url": url
+                    "url": url,
+                    "museum": "cleveland"
                 }
             }), 200
         else:

@@ -22,7 +22,8 @@ def fetch_met_exhibit(object_ID):
                 "objectType": exhibit_data.get("objectName"),
                 "artistWiki": exhibit_data.get("artistWikidata_URL"),
                 "objectWiki": exhibit_data.get("objectWikidata_URL"),
-                "galleryNumber": exhibit_data.get("GalleryNumber")
+                "galleryNumber": exhibit_data.get("GalleryNumber"),
+                "museum": "metropolitan"
             })
         else:
             logging.error(f"Failed to fetch exhibit data for object ID {object_ID}")

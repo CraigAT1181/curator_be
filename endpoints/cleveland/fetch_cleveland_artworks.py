@@ -38,7 +38,8 @@ def fetch_cleveland_artworks():
                         "title": title,
                         "date": creation_date,
                         "image": image,
-                        "creators": creators
+                        "creators": creators,
+                        "museum": "cleveland"
                     }
 
                     artworks.append(artwork_info)

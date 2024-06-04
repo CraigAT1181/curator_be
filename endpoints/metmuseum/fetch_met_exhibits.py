@@ -27,7 +27,8 @@ def fetch_met_exhibits():
                     "artist": exhibit_data.get("artistDisplayName"),
                     "objectType": exhibit_data.get("objectName"),
                     "artistWiki": exhibit_data.get("artistWikidata_URL"),
-                    "objectWiki": exhibit_data.get("objectWikidata_URL")
+                    "objectWiki": exhibit_data.get("objectWikidata_URL"),
+                    "museum": "metropolitan"
                 }
                 exhibits.append(exhibit)
             else:
