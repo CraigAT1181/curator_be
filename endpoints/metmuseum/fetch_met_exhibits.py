@@ -43,7 +43,7 @@ def fetch_met_exhibits():
         return jsonify({
             "exhibits": exhibits,
             "total_pages": total_pages
-        })
+        }), 200
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
         return jsonify({"message": "An unexpected error occurred."}), 500

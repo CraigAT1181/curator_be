@@ -5,7 +5,7 @@ import logging
 def fetch_single_artwork(object_ID):
     try:
         base_url = "https://openaccess-api.clevelandart.org/api/artworks/"
-        response = requests.get(base_url + str(object_ID))
+        response = requests.get(f"{base_url}{object_ID}")
         
         if response.status_code == 200:
             json_response = response.json()
@@ -45,8 +45,8 @@ def fetch_single_artwork(object_ID):
             }), 200
         else:
             logging.error(f"Failed to fetch exhibit data for object ID {object_ID}")
-            return jsonify({"message": f"Failed to fetch artwork data. HTTP Status Code: {response.status_code}"}), response.status_code
+            return jsonify({"error": f"Failed to fetch artwork data. HTTP Status Code: {response.status_code}"}), response.status_code
 
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
-        return jsonify({"message": "An unexpected error occurred."}), 500
+        return jsonify({"error": "An unexpected error occurred."}), 500

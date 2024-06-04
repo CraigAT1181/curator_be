@@ -6,7 +6,7 @@ def fetch_met_exhibit(object_ID):
 
     try:
         base_url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/"
-        response = requests.get(base_url + str(object_ID))
+        response = requests.get(f"{base_url}{object_ID}")
 
         if response.status_code == 200:
             exhibit_data = response.json()
@@ -24,7 +24,7 @@ def fetch_met_exhibit(object_ID):
                 "objectWiki": exhibit_data.get("objectWikidata_URL"),
                 "galleryNumber": exhibit_data.get("GalleryNumber"),
                 "museum": "metropolitan"
-            })
+            }), 200
         else:
             logging.error(f"Failed to fetch exhibit data for object ID {object_ID}")
             return jsonify({"message": f"Failed to fetch artwork data. HTTP Status Code: {response.status_code}"}), response.status_code

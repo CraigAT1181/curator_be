@@ -1,5 +1,4 @@
 from flask import jsonify
-import requests
 import logging
 from utils.fetch_artworks import fetch_artworks
 from utils.paginate_array import paginate_array
@@ -43,8 +42,8 @@ def fetch_cleveland_artworks():
         return jsonify({
             "artworks": artworks,
             "total_pages": total_pages
-        })
+        }), 200
 
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
-        return jsonify({"message": "An unexpected error occurred."}), 500
+        return jsonify({"error": "An unexpected error occurred."}), 500

@@ -12,12 +12,7 @@ def search_cleveland_artworks(keywords):
 
             info = json_response.get("info")
 
-            if info:
-                total = info.get("total")
-            else:
-                logging.error("No info key found.")
-                return None, "No info key found."
-
+            total = info.get("total")
             data = json_response.get("data")
 
             if data:
@@ -48,7 +43,7 @@ def search_cleveland_artworks(keywords):
                 return jsonify({
                     "artworks": artworks,
                     "total": total
-                })
+                }), 200
             else:
                 return jsonify({"message": "Couldn't find any results."})
     
