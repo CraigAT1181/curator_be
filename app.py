@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 # MET IMPORTS
 from endpoints.metmuseum.fetch_met_exhibits import fetch_met_exhibits
 from endpoints.metmuseum.fetch_met_exhibit import fetch_met_exhibit
+from endpoints.metmuseum.search_met_exhibits import search_met_exhibits
 
 # CLEVELAND IMPORTS
 from endpoints.cleveland.fetch_cleveland_artworks import fetch_cleveland_artworks
@@ -43,6 +44,14 @@ def create_app(config_name='default'):
         exhibit = fetch_met_exhibit(object_ID)
         
         return exhibit
+
+    @app.route('/met_exhibits/search', methods=['GET'])
+    @cross_origin()
+    def get_searched_met_exhibits():
+        keywords = request.get_json()
+        artworks = search_met_exhibits(keywords)
+        
+        return artworks
     
     # --------------- CLEVELAND MUSEUM ENDPOINTS -------------
     @app.route('/cleveland_artworks', methods=['GET'])
