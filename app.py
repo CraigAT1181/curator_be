@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from cache import cache
 import json
@@ -62,7 +62,7 @@ def create_app(config_name='default'):
     @app.route('/cleveland_artworks/search', methods=['GET'])
     @cross_origin()
     def get_searched_cleveland_artworks():
-        keywords = "chinese song"
+        keywords = request.get_json()
         artworks = search_cleveland_artworks(keywords)
         
         return artworks

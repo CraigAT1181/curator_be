@@ -1,55 +1,48 @@
 from flask import jsonify
-import requests
+from utils.run_cleveland_search import run_cleveland_search
+from utils.paginate_array import paginate_array
 import logging
 
 def search_cleveland_artworks(keywords):
     try:
-        base_url = "https://openaccess-api.clevelandart.org/api/artworks/?q="
-        response = requests.get(f"{base_url}{keywords}")
+        search_results = run_cleveland_search(keywords)
 
-        if response.status_code == 200:
-            json_response = response.json()
+        data = search_results.get("artworks")
+        total = search_results.get("total")
 
-            info = json_response.get("info")
+        paginated_data_array = paginate_array(data, total)
 
-            total = info.get("total")
-            data = json_response.get("data")
+        artwork_array = paginated_data_array.get("block")
+        total_pages = paginated_data_array.get("total_pages")
 
-            if data:
-                artworks = []
-                for artwork in data:
-                    id = artwork.get("id")
-                    title = artwork.get("title")
-                    creation_date = artwork.get("creation_date")
-                    images = artwork.get("images")
-                    image = images.get("web")
-                    creator_details = artwork.get("creators")
-                    creators = []
-                    for person in creator_details:
-                        creator = person.get("description")
-                        creators.append(creator)
-                
-                    artwork_info = {
-                        "objectID": id,
-                        "title": title,
-                        "date": creation_date,
-                        "image": image,
-                        "creators": creators,
-                        "museum": "cleveland"
-                    }
+        artworks = []
+        for artwork in artwork_array:
+            id = artwork.get("id")
+            title = artwork.get("title")
+            creation_date = artwork.get("creation_date")
+            images = artwork.get("images")
+            image = images.get("web")
+            creator_details = artwork.get("creators")
+            creators = []
+            for person in creator_details:
+                creator = person.get("description")
+                creators.append(creator)
+        
+            artwork_info = {
+                "objectID": id,
+                "title": title,
+                "date": creation_date,
+                "image": image,
+                "creators": creators,
+                "museum": "cleveland"
+            }
 
-                    artworks.append(artwork_info)
-                
-                return jsonify({
-                    "artworks": artworks,
-                    "total": total
-                }), 200
-            else:
-                return jsonify({"message": "Couldn't find any results."})
-    
-        else:
-            logging.error(f"Error: {response.status_code} - {response.text}")
-            return jsonify({"Error": "Request was unsuccessful."}), {response.status_code}
+            artworks.append(artwork_info)
+        
+        return jsonify({
+            "artworks": artworks,
+            "total_pages": total_pages
+        }), 200
 
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
