@@ -5,51 +5,152 @@
     "queries": "n/a"
   },
   "GET /met_exhibits": {
-    "description": "Obtains all met museum exhibits, paginated into blocks of 10, along with the number of pages.",
-    "example": [
-      {
-        "artist": "James Barton Longacre",
-        "artistWiki": "https://www.wikidata.org/wiki/Q3806459",
-        "date": "1853",
-        "image": "",
-        "machineBeginDate": 1853,
-        "machineEndDate": 1853,
-        "objectID": 1,
-        "objectType": "Coin",
-        "objectWiki": "",
-        "title": "One-dollar Liberty Head Coin"
-      },
-      {
-        "artist": "Christian Gobrecht",
-        "artistWiki": "https://www.wikidata.org/wiki/Q5109648",
-        "date": "1901",
-        "image": "",
-        "machineBeginDate": 1901,
-        "machineEndDate": 1901,
-        "objectID": 2,
-        "objectType": "Coin",
-        "objectWiki": "",
-        "title": "Ten-dollar Liberty Head Coin"
-      }
-    ],
-    "queries": "page=1&objects_per_page=10"
+    "description": "Obtains all met museum exhibits, paginated into blocks of 10, along with the total number of pages.",
+    "example": {
+      "exhibits": [
+        {
+          "artist": "James Barton Longacre",
+          "artistWiki": "https://www.wikidata.org/wiki/Q3806459",
+          "date": "1853",
+          "image": "",
+          "machineBeginDate": 1853,
+          "machineEndDate": 1853,
+          "objectID": 1,
+          "objectType": "Coin",
+          "objectWiki": "",
+          "title": "One-dollar Liberty Head Coin"
+        },
+        {
+          "artist": "Christian Gobrecht",
+          "artistWiki": "https://www.wikidata.org/wiki/Q5109648",
+          "date": "1901",
+          "image": "",
+          "machineBeginDate": 1901,
+          "machineEndDate": 1901,
+          "objectID": 2,
+          "objectType": "Coin",
+          "objectWiki": "",
+          "title": "Ten-dollar Liberty Head Coin"
+        }
+      ],
+      "total_pages": 2
+    },
+    "queries": "page=1&objects_per_page=8"
   },
   "GET /met_exhibits/<object_ID>/objects": {
     "description": "Obtains a specific met museum exhibit from an object_ID.",
-    "example": [
-      {
-        "artist": "James Barton Longacre",
-        "artistWiki": "https://www.wikidata.org/wiki/Q3806459",
-        "date": "1853",
-        "image": "",
-        "machineBeginDate": 1853,
-        "machineEndDate": 1853,
-        "objectID": 1,
-        "objectType": "Coin",
-        "objectWiki": "",
-        "title": "One-dollar Liberty Head Coin"
-      }
-    ],
+    "example": {
+      "artist": "James Barton Longacre",
+      "artistWiki": "https://www.wikidata.org/wiki/Q3806459",
+      "date": "1853",
+      "image": "",
+      "machineBeginDate": 1853,
+      "machineEndDate": 1853,
+      "objectID": 1,
+      "objectType": "Coin",
+      "objectWiki": "",
+      "title": "One-dollar Liberty Head Coin"
+    },
     "queries": "n/a"
+  },
+  "GET /met_exhibits/search": {
+    "description": "Fetches a paginated list of exhibits from search keywords.",
+    "example": {
+      "keywords": "chinese",
+      "exhibits": [
+        {
+          "artist": "Chelsea Porcelain Manufactory",
+          "artistWiki": "https://www.wikidata.org/wiki/Q2072152",
+          "date": "ca. 1755",
+          "image": "https://images.metmuseum.org/CRDImages/es/original/DP-12587-003.jpg",
+          "machineBeginDate": 1750,
+          "machineEndDate": 1760,
+          "museum": "metropolitan",
+          "objectID": 203344,
+          "objectType": "Group",
+          "objectWiki": "https://www.wikidata.org/wiki/Q116310461",
+          "title": "Chinese musicians"
+        }
+      ]
+    },
+    "queries": "page=1&objects_per_page=8"
+  },
+  "GET /cleveland_artworks": {
+    "description": "Obtains all cleveland museum artworks, paginated into blocks of 10, along with the total number of pages.",
+    "example": {
+      "artworks": [
+        {
+          "creators": ["John Singleton Copley (American, 1738–1815)"],
+          "date": "c. 1765",
+          "image": {
+            "filename": "1915.534_web.jpg",
+            "filesize": "402404",
+            "height": "893",
+            "url": "https://openaccess-cdn.clevelandart.org/1915.534/1915.534_web.jpg",
+            "width": "748"
+          },
+          "museum": "cleveland",
+          "objectID": 94979,
+          "title": "Nathaniel Hurd"
+        },
+        {
+          "creators": ["William Merritt Chase (American, 1849–1916)"],
+          "date": "1882–83",
+          "image": {
+            "filename": "1921.1239_web.jpg",
+            "filesize": "175673",
+            "height": "893",
+            "url": "https://openaccess-cdn.clevelandart.org/1921.1239/1921.1239_web.jpg",
+            "width": "939"
+          },
+          "museum": "cleveland",
+          "objectID": 102578,
+          "title": "Portrait of Dora Wheeler"
+        }
+      ],
+      "total_pages": 2
+    },
+    "queries": "page=1&objects_per_page=8"
+  },
+  "GET /cleveland_artworks/<object_ID>/artworks": {
+    "description": "Obtains a specific cleveland museum artwork from an object_ID.",
+    "example": {
+      "creators": ["John Singleton Copley (American, 1738–1815)"],
+      "date": "c. 1765",
+      "image": {
+        "filename": "1915.534_web.jpg",
+        "filesize": "402404",
+        "height": "893",
+        "url": "https://openaccess-cdn.clevelandart.org/1915.534/1915.534_web.jpg",
+        "width": "748"
+      },
+      "museum": "cleveland",
+      "objectID": 94979,
+      "title": "Nathaniel Hurd"
+    },
+    "queries": "n/a"
+  },
+  "GET /cleveland_artworks/search": {
+    "description": "Fetches a paginated list of artworks from search keywords.",
+    "example": {
+      "keywords": "chinese",
+      "artworks": [
+        {
+          "creators": ["Fachang Muqi (Chinese, 1220–1280)"],
+          "date": "c. 1250–79",
+          "image": {
+            "filename": "1958.427.1_web.jpg",
+            "filesize": "51885",
+            "height": "893",
+            "url": "https://openaccess-cdn.clevelandart.org/1958.427.1/1958.427.1_web.jpg",
+            "width": "426"
+          },
+          "museum": "cleveland",
+          "objectID": 135431,
+          "title": "Dragon"
+        }
+      ]
+    },
+    "queries": "page=1&objects_per_page=8"
   }
 }
