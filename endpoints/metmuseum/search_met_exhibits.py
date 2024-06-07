@@ -4,9 +4,9 @@ from utils.paginate_array import paginate_array
 import requests
 import logging
 
-def search_met_exhibits(keywords):
+def search_met_exhibits(search_terms):
     try:
-        search_results = run_met_search(keywords)
+        search_results = run_met_search(search_terms)
 
         objectID_array = search_results.get("objectIDs")
         total = search_results.get("total")

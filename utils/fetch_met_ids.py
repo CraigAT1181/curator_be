@@ -5,7 +5,7 @@ import logging
 @cache.cached(timeout=3600)
 def fetch_met_ids():
     try:
-        base_url = "https://collectionapi.metmuseum.org/public/collection/v1/objects"
+        base_url = "https://collectionapi.metmuseum.org/public/collection/v1/objects?metadataDate=2024-04-01"
         response = requests.get(base_url)
 
         if response.status_code == 200:

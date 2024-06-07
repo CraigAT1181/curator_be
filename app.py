@@ -48,10 +48,10 @@ def create_app(config_name='default'):
     @app.route('/met_exhibits/search', methods=['GET'])
     @cross_origin()
     def get_searched_met_exhibits():
-        keywords = request.get_json()
-        artworks = search_met_exhibits(keywords)
+        search_terms = request.args.get("keywords")
+        exhibits = search_met_exhibits(search_terms)
         
-        return artworks
+        return exhibits
     
     # --------------- CLEVELAND MUSEUM ENDPOINTS -------------
     @app.route('/cleveland_artworks', methods=['GET'])
@@ -71,8 +71,8 @@ def create_app(config_name='default'):
     @app.route('/cleveland_artworks/search', methods=['GET'])
     @cross_origin()
     def get_searched_cleveland_artworks():
-        keywords = request.get_json()
-        artworks = search_cleveland_artworks(keywords)
+        search_terms = request.args.get("keywords")
+        artworks = search_cleveland_artworks(search_terms)
         
         return artworks
 

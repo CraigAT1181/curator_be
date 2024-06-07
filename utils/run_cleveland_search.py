@@ -1,8 +1,6 @@
-from cache import cache
 import requests
 import logging
 
-@cache.cached(timeout=3600)
 def run_cleveland_search(keywords):
     try:
         base_url = "https://openaccess-api.clevelandart.org/api/artworks/?q="

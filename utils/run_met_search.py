@@ -1,11 +1,9 @@
-from cache import cache
 import requests
 import logging
 
-@cache.cached(timeout=3600)
 def run_met_search(keywords):
     try:
-        base_url = "https://collectionapi.metmuseum.org/public/collection/v1/search?q="
+        base_url = "https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&hasImages=true&q="
         response = requests.get(f"{base_url}{keywords}")
 
         if response.status_code == 200:

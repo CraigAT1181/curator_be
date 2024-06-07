@@ -3,9 +3,9 @@ from utils.run_cleveland_search import run_cleveland_search
 from utils.paginate_array import paginate_array
 import logging
 
-def search_cleveland_artworks(keywords):
+def search_cleveland_artworks(search_terms):
     try:
-        search_results = run_cleveland_search(keywords)
+        search_results = run_cleveland_search(search_terms)
 
         data = search_results.get("artworks")
         total = search_results.get("total")
