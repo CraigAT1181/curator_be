@@ -3,7 +3,7 @@ import logging
 
 def run_met_search(keywords):
     try:
-        base_url = "https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&hasImages=true&q="
+        base_url = "https://collectionapi.metmuseum.org/public/collection/v1/search?isOnView=true&isHighlight=true&hasImages=true&q="
         response = requests.get(f"{base_url}{keywords}")
 
         if response.status_code == 200:
