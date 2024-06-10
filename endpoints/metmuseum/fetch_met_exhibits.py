@@ -38,7 +38,7 @@ def fetch_met_exhibits():
                 }
                 exhibits.append(exhibit)
             else:
-                return jsonify({'error': 'Failed to fetch exhibit data'})
+                 return jsonify({'error': f'Failed to fetch exhibit data: {exhibit_response.status_code}'}), exhibit_response.status_code
 
         return jsonify({
             "exhibits": exhibits,
