@@ -53,16 +53,20 @@ def test_get_met_exhibit(client, mocker):
     mock_response = Flask.response_class(
         response=json.dumps({
             "objectID": 1,
-            "title": "Exhibit 1",
-            "primaryImage": "image1.jpg",
-            "objectDate": "Date 1",
-            "objectBeginDate": "Begin Date 1",
-            "objectEndDate": "End Date 1",
-            "artistDisplayName": "Artist 1",
-            "objectName": "Object 1",
-            "artistWikidata_URL": "Artist Wiki URL 1",
-            "objectWikidata_URL": "Object Wiki URL 1",
-            "GalleryNumber": "Gallery 1"
+            "title": "Exhibit",
+            "image": "image.jpg",
+            "date": "Date",
+            "objectBeginDate": "Begin Date",
+            "objectEndDate": "End Date",
+            "artist": "Artist",
+            "objectType": "Object",
+            "department": "Department",
+            "period": "Period",
+            "city": "City",
+            "artistWiki": "Artist Wiki URL",
+            "objectWiki": "Object Wiki URL",
+            "galleryNumber": "Gallery",
+            "museum": "Museum"
         }),
         status=200,
         mimetype='application/json'
@@ -74,17 +78,21 @@ def test_get_met_exhibit(client, mocker):
     
     assert response.status_code == 200
     data = response.get_json()
-    assert data['objectID'] == 1
-    assert data['title'] == "Exhibit 1"
-    assert data['primaryImage'] == "image1.jpg"
-    assert data['objectDate'] == "Date 1"
-    assert data['objectBeginDate'] == "Begin Date 1"
-    assert data['objectEndDate'] == "End Date 1"
-    assert data['artistDisplayName'] == "Artist 1"
-    assert data['objectName'] == "Object 1"
-    assert data['artistWikidata_URL'] == "Artist Wiki URL 1"
-    assert data['objectWikidata_URL'] == "Object Wiki URL 1"
-    assert data['GalleryNumber'] == "Gallery 1"
+    assert data["objectID"] == 1
+    assert data["title"] == "Exhibit"
+    assert data["image"] == "image.jpg"
+    assert data["date"] == "Date"
+    assert data["objectBeginDate"] == "Begin Date"
+    assert data["objectEndDate"] == "End Date"
+    assert data["artist"] == "Artist"
+    assert data["objectType"] == "Object"
+    assert data["department"] == "Department"
+    assert data["period"] == "Period"
+    assert data["city"] == "City"
+    assert data["artistWiki"] == "Artist Wiki URL"
+    assert data["objectWiki"] == "Object Wiki URL"
+    assert data["galleryNumber"] == "Gallery"
+    assert data["museum"] == "Museum"
 
 def test_get_searched_met_exhibits(client, mocker):
     mock_search_met_exhibits = mocker.patch('app.search_met_exhibits')
@@ -179,23 +187,23 @@ def test_get_single_cleveland_artwork(client, mocker):
     mock_response = Flask.response_class(
         response=json.dumps({
             "artwork": {
-                "collection": "Collection 1",
-                "creation_date": "Creation Date 1",
-                "creators": ["Creator 1"],
-                "department": "Department 1",
-                "description": "Description 1",
-                "did_you_know": "Interesting Fact 1",
+                "collection": "Collection",
+                "creation_date": "Creation Date",
+                "creators": ["Creator"],
+                "department": "Department",
+                "description": "Description",
+                "did_you_know": "Interesting Fact",
                 "image": {
-                    "filename": "filename 1",
-                    "filesize": "filesize 1",
-                    "height": "height 1",
-                    "url": "url 1",
-                    "width": "width 1"
+                    "filename": "filename",
+                    "filesize": "filesize",
+                    "height": "height",
+                    "url": "url",
+                    "width": "width"
                 },
-                "museum": "Museum 1",
+                "museum": "Museum",
                 "objectID": 1,  
-                "title": "Title 1",
-                "url": "URL 1"
+                "title": "Title",
+                "url": "URL"
             }
         }),
         status=200,
@@ -208,7 +216,7 @@ def test_get_single_cleveland_artwork(client, mocker):
 
     assert response.status_code == 200
     data = response.get_json()
-    assert data['artwork']['title'] == "Title 1"
+    assert data['artwork']['title'] == "Title"
     assert data['artwork']['objectID'] == 1
 
 def test_get_searched_cleveland_artworks(client, mocker):

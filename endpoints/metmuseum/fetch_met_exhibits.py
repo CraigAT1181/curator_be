@@ -32,6 +32,9 @@ def fetch_met_exhibits():
                     "machineEndDate": exhibit_data.get("objectEndDate"),
                     "artist": exhibit_data.get("artistDisplayName"),
                     "objectType": exhibit_data.get("objectName"),
+                    "department": exhibit_data.get("department"),
+                    "period": exhibit_data.get("period"),
+                    "city": exhibit_data.get("city"),
                     "artistWiki": exhibit_data.get("artistWikidata_URL"),
                     "objectWiki": exhibit_data.get("objectWikidata_URL"),
                     "museum": "metropolitan"
