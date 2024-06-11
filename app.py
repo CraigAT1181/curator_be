@@ -48,8 +48,7 @@ def create_app(config_name='default'):
     @app.route('/met_exhibits/search', methods=['GET'])
     @cross_origin()
     def get_searched_met_exhibits():
-        search_terms = request.args.get("keywords")
-        exhibits = search_met_exhibits(search_terms)
+        exhibits = search_met_exhibits()
         
         return exhibits
     
@@ -71,8 +70,7 @@ def create_app(config_name='default'):
     @app.route('/cleveland_artworks/search', methods=['GET'])
     @cross_origin()
     def get_searched_cleveland_artworks():
-        search_terms = request.args.get("keywords")
-        artworks = search_cleveland_artworks(search_terms)
+        artworks = search_cleveland_artworks()
         
         return artworks
 
