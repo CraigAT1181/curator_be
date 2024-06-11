@@ -4,7 +4,7 @@ import logging
 def paginate_array(array, total):
     try:
         page = int(request.args.get('page', 1))
-        objects_per_page = int(request.args.get('objects_per_page', 8))
+        objects_per_page = int(request.args.get('objects_per_page', 12))
 
         start_index = (page - 1) * objects_per_page
         end_index = min(start_index + objects_per_page, len(array))
