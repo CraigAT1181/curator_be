@@ -125,6 +125,64 @@ def test_get_searched_met_exhibits(client, mocker):
     assert data['exhibits'][0]['title'] == "Exhibit 1"
     assert data['exhibits'][1]['title'] == "Exhibit 2"
 
+# -- failed requests -- #
+def test_error_get_met_exhibits(client, mocker):
+    mock_fetch_met_exhibits = mocker.patch('app.fetch_met_exhibits')
+    
+    mock_response = Flask.response_class(
+        response=json.dumps({
+            "error": "Internal Server Error"
+        }),
+        status=500,
+        mimetype='application/json'
+    )
+    
+    mock_fetch_met_exhibits.return_value = mock_response
+
+    response = client.get('/met_exhibits')
+    
+    assert response.status_code == 500
+    data = response.get_json()
+    assert data["error"] == "Internal Server Error"
+
+def test_error_get_met_exhibit(client, mocker):
+    mock_fetch_met_exhibit = mocker.patch('app.fetch_met_exhibit')
+    
+    mock_response = Flask.response_class(
+        response=json.dumps({
+            "error": "Internal Server Error"
+        }),
+        status=500,
+        mimetype='application/json'
+    )
+    
+    mock_fetch_met_exhibit.return_value = mock_response
+
+    response = client.get('/met_exhibits/1/objects')
+    
+    assert response.status_code == 500
+    data = response.get_json()
+    assert data["error"] == "Internal Server Error"
+
+def test_error_get_searched_met_exhibits(client, mocker):
+    mock_search_met_exhibits = mocker.patch('app.search_met_exhibits')
+    
+    mock_response = Flask.response_class(
+        response=json.dumps({
+            "error": "Internal Server Error"
+        }),
+        status=500,
+        mimetype='application/json'
+    )
+    
+    mock_search_met_exhibits.return_value = mock_response
+
+    response = client.get('/met_exhibits/search')
+    
+    assert response.status_code == 500
+    data = response.get_json()
+    assert data["error"] == "Internal Server Error"
+
 # ---- CLEVELAND ENDPOINTS ---- #
 
 # -- successful requests -- #
@@ -271,3 +329,61 @@ def test_get_searched_cleveland_artworks(client, mocker):
     assert len(data['artworks']) == 2
     assert data['artworks'][0]['title'] == "Artwork 1"
     assert data['artworks'][1]['title'] == "Artwork 2"
+
+# -- failed requests -- #
+def test_error_get_cleveland_artworks(client, mocker):
+    mock_fetch_cleveland_artworks = mocker.patch('app.fetch_cleveland_artworks')
+    
+    mock_response = Flask.response_class(
+        response=json.dumps({
+            "error": "Internal Server Error"
+        }),
+        status=500,
+        mimetype='application/json'
+    )
+    
+    mock_fetch_cleveland_artworks.return_value = mock_response
+
+    response = client.get('/cleveland_artworks')
+    
+    assert response.status_code == 500
+    data = response.get_json()
+    assert data["error"] == "Internal Server Error"
+
+def test_error_get_single_cleveland_artwork(client, mocker):
+    mock_fetch_single_artwork = mocker.patch('app.fetch_single_artwork')
+    
+    mock_response = Flask.response_class(
+        response=json.dumps({
+            "error": "Internal Server Error"
+        }),
+        status=500,
+        mimetype='application/json'
+    )
+    
+    mock_fetch_single_artwork.return_value = mock_response
+
+    response = client.get('/cleveland_artworks/94979/artworks')
+    
+    assert response.status_code == 500
+    data = response.get_json()
+    assert data["error"] == "Internal Server Error"
+
+def test_error_get_searched_cleveland_artworks(client, mocker):
+    mock_search_cleveland_artworks = mocker.patch('app.search_cleveland_artworks')
+    
+    mock_response = Flask.response_class(
+        response=json.dumps({
+            "error": "Internal Server Error"
+        }),
+        status=500,
+        mimetype='application/json'
+    )
+    
+    mock_search_cleveland_artworks.return_value = mock_response
+
+    response = client.get('/cleveland_artworks/search')
+    
+    assert response.status_code == 500
+    data = response.get_json()
+    assert data["error"] == "Internal Server Error"
