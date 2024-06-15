@@ -23,8 +23,8 @@ def fetch_artworks():
             
         else:
             logging.error(f"Error: {response.status_code} - {response.text}")
-            return []
+            return {"error": f"Failed to fetch data, status code: {response.status_code}"}
         
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
-        return []
+        return {"error": f"An unexpected error occurred: {e}"}
